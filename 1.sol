@@ -25,5 +25,12 @@ contract DigitalIdentity {
     require(identities[msg.sender].owner == address(0), "Identity already registered");
     identities[msg.sender].owner = msg.sender;
   }
+  
+  // Transfer ownership of a user identity
+  function transferIdentityOwnership(address newOwner) public {
+    require(identities[msg.sender].owner == msg.sender, "No identity found");
+    identities[newOwner] = identities[msg.sender];
+    identities[msg.sender].owner = newOwner;
+  }
 
 }
